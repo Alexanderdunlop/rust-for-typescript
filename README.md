@@ -404,3 +404,125 @@ When you are starting out using rust you should see
 2. clonse
 
 That is totally normal, completely fine. understanding, at least for me, comes in waves. The more I understand, the more I realize I understand less.
+
+**Vector**
+Vec (rust) and [](typescript) are very similar. Their behaviors are near identical.
+These two are functionally equivalent
+
+```js
+const a = [1,2,3,4,5] as const;
+```
+
+```rust
+let a = vec![1,2,3,4,5];
+```
+
+Mutation
+
+```js
+const a = [1, 2, 3, 4, 5];
+a.push(6); // [1,2,3,4,5,6] // returns size
+```
+
+```rust
+let a = vec![1,2,3,4,5];
+a.push(6); // Error: a is not mutable
+
+// but with rust we can shadow
+let mut a = a;
+a.push(6); // [1,2,3,4,5,6] // does not return size
+```
+
+```js
+const a = [1, 2, 3, 4, 5];
+a.pop(); // [1,2,3,4] undefined or T
+```
+
+```rust
+let mut a = vec![1,2,3,4,5];
+a.pop(); // [1,2,3,4] Option<T>
+```
+
+Accessing Data
+
+```js
+const a = [1,2,3,4,5] as const;
+const item = a[2];
+```
+
+```rust
+let a = vec![1,2,3,4,5];
+let item = a[2]; // does work, but if out of bounds, panic
+let item = a.get(2); // better, returns Option<T> where T can be i32
+```
+
+An Option<T> is a possible undefined value. All things could be undefined, must be specified with an Option.
+We will talk about enums an Options in depth shortly
+
+Tuple
+This doesn't really have a similarity in javascript
+
+```rust
+let a = (5, String::from("hello")); // this type is (i32, String)
+```
+
+it is "near" equivalent to
+
+```js
+const a = [5, "hello"];
+```
+
+You can pattern match (think destructuring) tuples;
+
+```rust
+let a = (5, String::from("hello")); // this type is (i32, String)
+
+// you probably best know thius as destructuring, but we will refer to this
+// as pattern matching.
+let (my_num, my_str) = a;
+```
+
+You can even pattern match in a function
+
+```rust
+let a = (5, String::from("hello")); // this type is (i32, String)
+
+fn bar((my_num, my_str): (i32, String)) {
+
+}
+
+bar(a)
+```
+
+Structs
+
+```rust
+struct MyStruct {
+  x: usize,
+  y: usize,
+  z: usize,
+}
+
+fn bar(MyStruct { y, z, .. }: MyStruct) -> bool {
+  return y * z < 100;
+}
+
+fn main() {
+
+  let foo = MyStruct {
+    x: 69,
+    y: 420,
+    z: 1337
+  }
+
+  let MyStruct { x, .. } = foo;
+  let MyStruct { x, y, .. } = foo;
+  let MyStruct { x, y, z, .. } = foo;
+
+  if let MyStruct { x, .. } = foo {
+    println!("things about x {}", x)
+  }
+}
+```
+
+unwrap, todo, u

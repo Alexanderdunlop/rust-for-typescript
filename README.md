@@ -336,3 +336,71 @@ impl Foo for MyStruct {
 ```
 
 traits compose this may not sound big, but its AMAZING effectively prevents the need for inheritance.
+
+### Numbers
+
+```js
+// We would call this an interger in rust
+4 // this... is technically a smi, but for you purpose, its a  number
+
+// interger becomes a float auto_magically_ in js
+4 / 3 = 1.3333333333
+
+// this is totally cool
+4 * -1 = -4
+```
+
+None of that was cool for rust
+Rust you have to specify the types <NUMBER> = power of two
+i<NUMBER> = an integer that can be negative or positive (signed)
+u<NUMBER> = an integer that can be positive only (unsigned)
+f<NUMBER> = a number that requires decimal point
+usize = a u<NUMBER> where <NUMBER> is your system arch. (64bit = u64)
+isize = a i<NUMBER> where <NUMBER> is your system arch. (64bit = i64)
+
+```rust
+4 / 3 = 1
+
+// cannont divide {float} by {integer}
+// yes... this is an error
+4.0 / 3 = Nope
+
+// 4 is an i32
+4 * -1 = -4
+
+// 4 is an i32
+let foo = 4u23; // saying its a 4 that is a u32 (defining type)
+foo * -1 // ERROR
+```
+
+If you have ever worked with any static language, this should be pretty straight forward.
+
+**The difference between String and &str**
+Yes, you will see there are two types of strings you commonly run into. So what are they?
+
+String
+
+- Well String is a heap allocated (heap may be a foreign word to you)
+- String can be mutable
+
+&str
+
+- this points to a sequence of utf-8 characters. Its commonly called a slice. Its a view into a String
+- its immutable
+- its analogous to &[u8]
+  So if i say String, i mean String and if i say stir i mean &str (quick whiteboarding)
+
+The best way to think about this is in JavaScript is you were to pass a string around you don't have to copy all the data. In JavaScript land when you do substring do you get a new string or a reference I honestly have no idea.
+
+You don't have control in JavaScript on how memory works.
+
+**Basics on Rust**
+
+Just some basics so we can understand things going forward
+
+When you are starting out using rust you should see
+
+1. unwraps
+2. clonse
+
+That is totally normal, completely fine. understanding, at least for me, comes in waves. The more I understand, the more I realize I understand less.

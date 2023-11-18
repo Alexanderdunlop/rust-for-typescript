@@ -1,0 +1,25 @@
+{
+  "name": "rust-for-typescript",
+  "version": "1.0.0",
+  "description": "These are my notes from the course on [Rust for Typescript Developers](https://frontendmasters.com/courses/rust-ts-devs/).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alexanderdunlop/rust-for-typescript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alexanderdunlop/rust-for-typescript/issues"
+  },
+  "homepage": "https://github.com/Alexanderdunlop/rust-for-typescript#readme",
+  "dependencies": {
+    "@types/node": "^20.9.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}

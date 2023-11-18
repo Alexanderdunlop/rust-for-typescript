@@ -554,3 +554,67 @@ fn main() {
     println!("Hello, world!");
 }
 ```
+
+### Value, Mutable, Immutable
+
+One more thing about rust
+You will hear me say the following words
+
+- value
+- mutable reference or mutable borrow
+- immutable reference or immutable borrow
+
+In rust you can have:
+
+```
+x = 5
+The 5 is a value, it is something that is sitting there in memory. It is the thing.
+The owner of said value is x, in rust land you can refer to a value.
+y = &x
+That means y refers to x, if you were to print out y it would always be the same as x. This is a read only reference.
+y = &mut x
+This means not only can I look at the data but it means I can also change the data. Not really done in any other languages. For you to be able to do &mut the original variable needs to be mut so:
+mut x = 5
+
+fn do_this(&self)
+This means its a function that refers to self but it is not self it does not contain the value but it contains a reference.
+
+fn do_this(&mut self)
+This means you can only call it on a function on a object that is defined as mutable, that way you can seperate functions that mutate vs functions that don't mutate.
+```
+
+- reference: means readonly
+- mutable reference: means write & read
+- value: means the thing itself
+
+Borrow checker:
+In rust when you program there can be only one value owner, you can have as many readonly references as long as there are no write and read references out. You can only have one write reference and no read references.
+
+More technical version of mutable reference or immutable reference is mutable borrow or immutable borrow.
+This will be in the complier errors.
+
+() is a unit
+() is called "unit". Effectively it is "nothing" value.
+
+```rust
+if true {
+  println!("foo");
+}
+
+// I could write this
+// --v this has type ()
+let foo = if true {
+  println!("foo");
+}
+```
+
+You will see this often:
+Won't make sense right now.
+
+```rust
+fn only_evens(x: usize) -> Result<()> {
+  return Ok(())
+}
+```
+
+This means i'm returning the unit of nothing, it doesn't exist but hey we are okay. Everything went Ok in this function, but we used the nothing unit because we have no value. Sometimes you have functions that have side effects that don't actually do anything for you. It's not like undefined.

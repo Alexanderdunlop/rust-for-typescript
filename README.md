@@ -656,3 +656,33 @@ Closures are different in JavaScript, when we refer to closures in JavaScript we
 
 In rust a closure is: `|x| x + 1`
 In JavaScript this is a lambda function i.e. `x => x + 1`
+
+What is collect?
+The Iterator is its own data type. So we must convert from an iterator back into the struct we want and in our case its a Vec
+
+### Borrow checker example
+
+This is an error
+
+```rust
+let mut foo = vec![1,2,3]
+  .iter()
+  .map(|x| x + 1);
+
+while let Some(x) = foo.next() {
+}
+```
+
+This is because this iterator refers to the vec but who owns the vector nobody, how long does this value live it was created temp and then it went away. So now we have a reference to nothing so this needs to be.
+
+```rust
+let data = vec![1,2,3];
+let mut foo = data
+  .iter()
+  .map(|x| x + 1);
+
+while let Some(x) = foo.next() {
+}
+```
+
+Its important to think how things live in memory.

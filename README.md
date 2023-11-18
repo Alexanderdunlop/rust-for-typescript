@@ -526,3 +526,31 @@ fn main() {
 ```
 
 unwrap, todo, u
+
+```rust
+// todo is good for throwing an error when you want to implement the function later
+fn not_complete_fn(x: usize) -> bool {
+    if x < 10 {
+        return true;
+    }
+
+    todo!("finish this later");
+}
+
+// unreachable will throw an error if the code is reached
+fn only_evens(x: usize) -> bool {
+    if x % 2 == 1 {
+        unreachable!("this should never happen");
+    }
+
+    return true;
+}
+
+// unwrap will force the optional to be not optional but it is dangerous
+fn main() {
+    let foo = Some(5);
+    let bar = foo.unwrap();
+
+    println!("Hello, world!");
+}
+```

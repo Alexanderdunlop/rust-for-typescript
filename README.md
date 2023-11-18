@@ -618,3 +618,41 @@ fn only_evens(x: usize) -> Result<()> {
 ```
 
 This means i'm returning the unit of nothing, it doesn't exist but hey we are okay. Everything went Ok in this function, but we used the nothing unit because we have no value. Sometimes you have functions that have side effects that don't actually do anything for you. It's not like undefined.
+
+### Coding an Iterator
+
+To begin with, There are 2 things that have to be understood in Rust.
+This is for fundamental understanding of the language.
+
+1. Iterators
+2. Enums
+
+Once you get these two, it becomes easier to work with rust initially. As these concepts are a bit wonkey coming from TypeScript.
+
+Often in TypeScript you iterate but you don't use iterators.
+
+Lets start with iterators.
+
+```
+// If you have a vector which is just a list, a iterator is a seperate data structure.
+// That can walk through that data.
+// Doesn't matter what the data structure is, if there is an order an iterator can walk through it.
+vec![1,2,3]
+{
+  prt => "["
+  idx:
+}
+// You would have a reference to this iterator and call something like .next() this will give the next value out.
+```
+
+Iterators
+I think iterators will make the easiest transition as they have the strongest similarity in javascript and we can start with `.map`
+
+.map is not an `iterator` it `iterates` not the same but quite similar but completely different at the same time.
+
+### Closures
+
+Closures are different in JavaScript, when we refer to closures in JavaScript we are saying the value is closed of the function and can't be accessed outside of the closure.
+
+In rust a closure is: `|x| x + 1`
+In JavaScript this is a lambda function i.e. `x => x + 1`

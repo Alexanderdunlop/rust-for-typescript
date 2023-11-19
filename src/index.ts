@@ -1,2 +1,7 @@
-const foo = [1, 2, 3].map((x) => x + 1);
-console.log(foo);
+import fs from "fs";
+
+fs.readFileSync("lines")
+  .toString()
+  .split("\n")
+  .filter((_, i) => i % 2 === 0)
+  .forEach((line) => console.log(line));

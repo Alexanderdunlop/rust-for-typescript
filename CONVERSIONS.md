@@ -73,3 +73,49 @@ file
     .take(2)
     .for_each(|(_, line)| println!("{}", line));
 ```
+
+### Enums
+
+```ts
+enum Color {
+  Red,
+  Green,
+  Blue,
+}
+
+function printColor(color: Color) {
+  switch (color) {
+    case Color.Red:
+      console.log("red");
+      break;
+    case Color.Green:
+      console.log("green");
+      break;
+    case Color.Blue:
+      console.log("blue");
+      break;
+  }
+}
+
+printColor(Color.Red);
+```
+
+```rust
+enum Color {
+    Red,
+    Green,
+    Blue,
+}
+
+fn print_color(color: Color) {
+    match color {
+        Color::Red => println!("red"),
+        Color::Green => println!("green"),
+        Color::Blue => println!("blue"),
+    };
+}
+
+fn main() {
+    print_color(Color::Red)
+}
+```

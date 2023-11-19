@@ -1,3 +1,9 @@
+Rust enums are incredible
+They are nothing like TypeScripts enums, and a reason why rust, for a static typed language, is so good.
+
+If a match statement using a enum you must use all the enum values, unlike in JavaScript switch statements.
+
+```rust
 enum Color {
     Red,
     Green,
@@ -21,18 +27,6 @@ impl Color {
         }
     }
 }
+```
 
-fn print_color(color: Color) {
-    match color {
-        Color::Red => println!("red"),
-        Color::Green => println!("green"),
-        Color::Blue => println!("blue"),
-        Color::Yellow => println!("yellow"),
-    };
-}
-
-fn main() {
-    let foo = Color::Green;
-
-    foo.is_green();
-}
+To do this in TypeScript you would have to go through a module, but with Rust its on the enum itself.

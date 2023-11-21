@@ -119,3 +119,23 @@ fn main() {
     print_color(Color::Red)
 }
 ```
+
+```ts
+type Foo = {
+  bar?: string;
+};
+
+const item3: Foo = { bar: undefined };
+```
+
+```rust
+enum Option<T> { // yes, generics can be used in enums, again, cool
+  None
+  Some(T),
+}
+```
+
+```rust
+Some(5);
+Option::Some(5);
+```

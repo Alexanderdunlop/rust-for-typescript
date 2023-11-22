@@ -1,3 +1,3 @@
-function multiply(value: number | undefined): number | undefined {
-  return value === undefined ? undefined : value * 5;
+function practice(nums: number[], idx: number): number {
+  return (nums[idx] ?? idx) * 5;
 }

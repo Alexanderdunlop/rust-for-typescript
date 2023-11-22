@@ -113,3 +113,19 @@ let value = match value {
 ```
 
 In go this is the same as `if err != nil`
+
+```ts
+function practice(nums: number[], idx: number): number {
+  return (nums[idx] ?? idx) * 5;
+}
+```
+
+```rust
+fn practice(nums: Vec<usize>, idx: usize) -> usize {
+    return nums.get(idx).unwrap_or(&idx) * 5;
+}
+```
+
+Rust as a language is hard. But there are TONS of utilities that make it really easy to work with. This is just one example. The Option interface.
+
+Rusts take on the "Billion" dollar mistake i think is the right move.

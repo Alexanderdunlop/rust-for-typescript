@@ -87,3 +87,14 @@ In the simplest sense, you always know where your errors happen, you always know
 - Result saves you from errors you should be able to prevent
 - Option saves you from undefined is not a function
 - Rust doesn't save you from bad logic, we are all programmers
+
+```rust
+file
+  .lines()
+  .filter_map(|line| line.parse::<usize>().ok())
+  .for_each(|line| {
+    println!("{}", value);
+  })
+```
+
+This will filter out any not numbers.

@@ -1,3 +1,6 @@
+- Running ts `npx ts-node src/index.ts`
+- Running rust `cargo run`
+
 ## Intro
 
 These are my notes from the course on [Rust for Typescript Developers](https://frontendmasters.com/courses/rust-ts-devs/).

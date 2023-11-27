@@ -62,4 +62,50 @@ fn main() {
 ```
 
 What happens here:
-Instead of being 8 bytes of age we need to store something else, you could imagine it stores a pointer. Which points to somewhere over into the Heap, this is the place I can grow my memory, this is where I can store all my usizes. Then it will store a length on the stack, that way I know how many items I have. Then it can store some kind of capacity, so that way it knows when it needs to resize, when you keep adding items its going to run out of memory that it has allocated, it normally starts of around 5 which is the default one, it has some low amount then it has to grow in memory. 
+Instead of being 8 bytes of age we need to store something else, you could imagine it stores a pointer. Which points to somewhere over into the Heap, this is the place I can grow my memory, this is where I can store all my usizes. Then it will store a length on the stack, that way I know how many items I have. Then it can store some kind of capacity, so that way it knows when it needs to resize, when you keep adding items its going to run out of memory that it has allocated, it normally starts of around 5 which is the default one, it has some low amount then it has to grow in memory.
+
+If we referred to a value in the Vec, we would have to go `to our struct on the stack -> to the pointer -> pointer has to be followed to the heap -> find the vec in the heap -> offset to the value` then you have the item out of the vector.
+
+For everything that is stored on the heap there is something stored on the stack. Something from the stack is pointing to the heap, this is how the magic of rust happens, as we clean up memory on the stack anything that has heap related memory can also be cleaned up at the same time for free. This is why there are so many rules around the borrow checker, because if you just had references everywhere you wouldn't know if something was still pointing to a memory region that needed to be cleaned up.
+
+Something allocated on the Stack can just be on the Stack anything that is allocated on the Heap has something else on the Stack.
+
+What the lifecycle of these items, how long do they live?
+
+Probably the simplest way to think about it is if you know any C, is that when the function returns that stack pointer goes all the way the beginning, so everything after the stack pointer even though it may still have stuff in memory its just not considered valid. Its out, because next time we call a function we may override it.
+Its gone so you can't refer to it anymore.
+
+If you have an array of an array, then the stack points to the heap then the heap item points to the heap again but everything is traced back to the stack. The stack item is the owner of all children heap values.
+
+You can understand why the heap is slow because you have to ask the operating system where to assign memory the operating system give you an allocation of memory, then the underlying allocator is going to have to divide out that memory. How does it know what to claim back, a lot of math is involved. Where as the stack just says add 8, add 8, remove 16.
+
+```rust
+#[derive(Debug)] // Says you can be pretty printed
+struct MyStruct {
+    age: usize;
+}
+
+fn main() {
+
+    let mut items: Vec<&MyStruct> = vec![];
+
+    { // this is a scope any value after the scope will be dropped
+        let item = MyStruct { age: 0 };
+        items.push(&item);
+    }
+
+    println!("{:?}", items);
+}
+```
+
+This is a problem, as item doesn't live as long as items. Rust identifies that it doesn't live as long, as item holds onto items. This is a lifetime error.
+
+- `let item = MyStruct { age: 0 };` - is the value, item owns the value
+- `let mut items: Vec<&MyStruct> = vec![];` - the vector is the value, items owns a vector.
+- `items.push(&item);` - items is getting pushed in a reference.
+
+You have to have these things set up in your head which is:
+
+- The value.
+- A reference to the value.
+- A mutatable reference to the value, the right to mutate.

@@ -187,3 +187,26 @@ fn main() {
     println!("{:?}", items);
 }
 ```
+
+If Rust cannot guaranttee it is safe, it will fail it.
+Rust does exactly what you tell it to do at all points.
+
+Rust will automatically drop values for, you can manually do this but it is quite advanced `drop()`.
+
+```rust
+fn main() {
+    let items: i32 = vec![1, 2, 3]
+        .iter()
+        .map(|x| x + 1)
+        .sum();
+
+    println!("{:?}", items);
+}
+```
+
+```rust
+let first = items.get_mut(0);
+// same as
+let first = items[0];
+// expect it is a mut ref instead of just a ref
+```

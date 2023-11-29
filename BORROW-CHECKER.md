@@ -81,3 +81,109 @@ What rule are we breaking?
 1. There can only be `one` value owner <----
 2. There can be `unlimited` immutable borrow (reference) with `no` mutable references
 3. There can be only `one` mutable reference an `no` immutable references
+
+```rust
+#[derive(Debug)]
+struct Item {
+    count: usize
+}
+
+fn add_one(item: &mut Item) {
+    item.count += 1;
+}
+
+fn print_all(items: &Vec<Item>) {
+    for item in items {
+        println!("{:?}", item);
+    }
+}
+
+fn main() {
+    let mut items = vec![Item { count: 1 }];
+    let first = items.first_mut();
+    println!("{:?}", first);
+    print_all(&items);
+    println!("{:?}", first); // breaks a rule
+}
+```
+
+```rust
+fn main() {
+    let mut items = vec![Item { count: 1 }];
+    let first = items.get_mut(0);
+    let second = items.get_mut(1); // breaks a rule
+    println!("{:?}", first);
+}
+```
+
+You can only ever have one out, the best way to think of this is imagine you have an array if you change something in the array, the thing pointing might not be there so it would break.
+
+```rust
+fn main() {
+    let mut items = vec![Item { count: 1 }];
+    let first = items.get_mut(0);
+    let second = items.get_mut(1);
+    println!("{:?}", second);
+}
+```
+
+This is valid as the first flow ends as rust identifies that the first lifetime ends.
+
+```rust
+fn main() {
+    let mut items = vec![Item { count: 1 }];
+    let first = items.get_mut(0);
+    println!("{:?}", first);
+    let second = items.get_mut(1);
+    println!("{:?}", second);
+}
+```
+
+This is also valid
+
+```rust
+fn main() {
+    let mut items = vec![Item { count: 1 }];
+    let first = items.get_mut(0);
+    println!("{:?}", first);
+    let second = items.get_mut(1);
+    println!("{:?}", second);
+    println!("{:?}", first); // this is now wrong
+}
+```
+
+```rust
+fn add_one(item: Item) {
+    item.count += 1;
+}
+
+fn add_one(item: &mut Item) {
+    item.count += 1;
+}
+```
+
+This is the most common mistake starting out in Rust, this is done for you in other languages.
+
+```rust
+fn main() {
+    let items = vec![1,2,3]
+        .iter()
+        .map(|x| x + 1);
+
+    println!("{:?}", items);
+}
+```
+
+Why does this error, iter takes a reference to self, then returns a reference to the items its going over.
+The vec![1,2,3] is only being held onto temp as no one is pointing at it.
+
+```rust
+fn main() {
+    let data = vec![1,2,3];
+    let items = data
+        .iter()
+        .map(|x| x + 1);
+
+    println!("{:?}", items);
+}
+```

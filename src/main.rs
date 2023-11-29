@@ -1,15 +1,7 @@
-#[derive(Debug)]
-struct Item {
-    count: usize
-}
-
-fn add_one(item: &mut Item) {
-    item.count += 1;
-}
-
 fn main() {
-    let mut item = Item { count: 1 };
-    println!("{:?}", item);
-    add_one(&mut item);
-    println!("{:?}", item);
+    let items = vec![1,2,3]
+        .iter()
+        .map(|x| x + 1);
+
+    println!("{:?}", items);
 }
